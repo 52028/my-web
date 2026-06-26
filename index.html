@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王者荣耀 - 官方介绍</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Microsoft YaHei','Segoe UI',sans-serif;background:#0a0e17;color:#e0e0e0;overflow-x:hidden}
+
+/* 导航栏 */
+.navbar{position:fixed;top:0;width:100%;z-index:1000;background:rgba(10,14,23,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,215,0,0.15);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px;transition:all 0.3s}
+.navbar .logo{display:flex;align-items:center;gap:12px}
+.navbar .logo .icon{width:40px;height:40px;background:linear-gradient(135deg,#f5a623,#f76b1c);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 2px 12px rgba(245,166,35,0.4)}
+.navbar .logo span{font-size:20px;font-weight:700;background:linear-gradient(135deg,#ffd700,#ff8c00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
+.navbar .nav-links{display:flex;gap:32px;list-style:none}
+.navbar .nav-links li a{color:#8899aa;text-decoration:none;font-size:15px;padding:8px 0;border-bottom:2px solid transparent;transition:all 0.3s ease;position:relative}
+.navbar .nav-links li a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:linear-gradient(90deg,#ffd700,#ff8c00);transition:width 0.3s ease}
+.navbar .nav-links li a:hover{color:#ffd700}
+.navbar .nav-links li a:hover::after{width:100%}
+
+/* 英雄区 */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(245,166,35,0.08) 0%,transparent 70%),linear-gradient(180deg,#0a0e17 0%,#111827 50%,#0a0e17 100%);position:relative;text-align:center;padding:100px 20px 60px}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L35 25 L55 30 L35 35 L30 55 L25 35 L5 30 L25 25 Z' fill='rgba(255,215,0,0.03)'/%3E%3C/svg%3E") repeat;pointer-events:none}
+.hero-content{position:relative;z-index:1;max-width:800px}
+.hero-content h1{font-size:64px;font-weight:900;background:linear-gradient(135deg,#ffd700,#ff8c00,#ff4500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px;text-shadow:none;animation:fadeInDown 1s ease}
+.hero-content .subtitle{font-size:20px;color:#8899aa;margin-bottom:40px;line-height:1.8;animation:fadeInUp 1s ease 0.3s both}
+.hero-content .btn-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fadeInUp 1s ease 0.6s both}
+.hero-content .btn{padding:14px 36px;border-radius:30px;font-size:16px;font-weight:600;cursor:pointer;text-decoration:none;transition:all 0.35s ease;border:none;position:relative;overflow:hidden}
+.hero-content .btn-primary{background:linear-gradient(135deg,#f5a623,#f76b1c);color:#fff;box-shadow:0 4px 20px rgba(245,166,35,0.35)}
+.hero-content .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(245,166,35,0.5)}
+.hero-content .btn-outline{background:transparent;color:#ffd700;border:2px solid rgba(255,215,0,0.4)}
+.hero-content .btn-outline:hover{background:rgba(255,215,0,0.1);border-color:#ffd700;transform:translateY(-3px);box-shadow:0 4px 20px rgba(255,215,0,0.2)}
+
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+
+/* 通用板块标题 */
+.section-title{text-align:center;margin-bottom:50px}
+.section-title h2{font-size:36px;font-weight:800;background:linear-gradient(135deg,#ffd700,#ff8c00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
+.section-title p{color:#667788;font-size:16px}
+
+/* 游戏特色 */
+.features{padding:80px 20px;background:#111827}
+.features .container{max-width:1200px;margin:0 auto}
+.features .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+.feature-card{background:linear-gradient(145deg,#1a1f2e,#151a28);border:1px solid rgba(255,215,0,0.08);border-radius:20px;padding:36px 28px;text-align:center;cursor:pointer;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 50% 0%,rgba(255,215,0,0.06) 0%,transparent 70%);opacity:0;transition:opacity 0.4s}
+.feature-card:hover{transform:translateY(-8px);border-color:rgba(255,215,0,0.35);box-shadow:0 16px 40px rgba(245,166,35,0.12),0 0 60px rgba(255,215,0,0.05)}
+.feature-card:hover::before{opacity:1}
+.feature-card .icon{width:64px;height:64px;margin:0 auto 20px;background:linear-gradient(135deg,rgba(245,166,35,0.15),rgba(247,107,28,0.1));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;transition:all 0.4s}
+.feature-card:hover .icon{transform:scale(1.1);box-shadow:0 0 20px rgba(255,215,0,0.2)}
+.feature-card h3{font-size:20px;color:#ffd700;margin-bottom:10px;font-weight:700}
+.feature-card p{color:#8899aa;font-size:14px;line-height:1.7}
+
+/* 英雄展示 */
+.heroes{padding:80px 20px;background:#0a0e17;position:relative}
+.heroes::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:60px;background:linear-gradient(180deg,transparent,rgba(255,215,0,0.3),transparent)}
+.heroes .container{max-width:1200px;margin:0 auto}
+.heroes .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+.hero-card{background:linear-gradient(180deg,#1a1f2e 0%,#111827 100%);border:1px solid rgba(255,215,0,0.06);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);position:relative}
+.hero-card:hover{transform:translateY(-10px);border-color:rgba(255,215,0,0.4);box-shadow:0 20px 50px rgba(245,166,35,0.15),0 0 30px rgba(255,215,0,0.05)}
+.hero-card .img-placeholder{height:180px;display:flex;align-items:center;justify-content:center;font-size:60px;position:relative;overflow:hidden;transition:all 0.4s}
+.hero-card:hover .img-placeholder{transform:scale(1.05)}
+.hero-card .img-placeholder::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(180deg,transparent,rgba(10,14,23,0.9))}
+.hero-card .info{padding:16px;text-align:center;position:relative;z-index:1}
+.hero-card .info .name{font-size:18px;font-weight:700;color:#ffd700;margin-bottom:4px}
+.hero-card .info .role{font-size:13px;color:#667788;padding:2px 12px;border:1px solid rgba(255,215,0,0.2);border-radius:20px;display:inline-block;margin-top:6px;transition:all 0.3s}
+.hero-card:hover .info .role{background:rgba(255,215,0,0.1);border-color:rgba(255,215,0,0.5);color:#ffd700}
+
+/* 背景色 */
+.bg-assassin{background:linear-gradient(135deg,#1a1025,#2d1b3d)}
+.bg-mage{background:linear-gradient(135deg,#0d1b2a,#1b2838)}
+.bg-warrior{background:linear-gradient(135deg,#2a1a0d,#3d2b1b)}
+.bg-tank{background:linear-gradient(135deg,#0d2a1a,#1b3d2b)}
+.bg-marksman{background:linear-gradient(135deg,#1a0d0d,#3d1b1b)}
+.bg-support{background:linear-gradient(135deg,#0d1a2a,#1b2b3d)}
+
+/* 游戏模式 */
+.modes{padding:80px 20px;background:#111827}
+.modes .container{max-width:1200px;margin:0 auto}
+.modes .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.mode-card{background:linear-gradient(145deg,#1a1f2e,#151a28);border:1px solid rgba(255,215,0,0.08);border-radius:20px;padding:30px;cursor:pointer;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
+.mode-card::after{content:'';position:absolute;top:-50%;right:-50%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,215,0,0.04) 0%,transparent 70%);transition:all 0.5s}
+.mode-card:hover::after{top:-30%;right:-30%;width:250px;height:250px}
+.mode-card:hover{transform:translateY(-6px);border-color:rgba(255,215,0,0.3);box-shadow:0 12px 35px rgba(0,0,0,0.3)}
+.mode-card .mode-icon{font-size:40px;margin-bottom:16px;transition:transform 0.4s}
+.mode-card:hover .mode-icon{transform:scale(1.15) rotate(-5deg)}
+.mode-card h3{font-size:20px;color:#ffd700;margin-bottom:10px;font-weight:700}
+.mode-card p{color:#8899aa;font-size:14px;line-height:1.7}
+.mode-card .players{display:inline-block;margin-top:12px;padding:4px 14px;background:rgba(255,215,0,0.08);border-radius:20px;font-size:13px;color:#c0a050;transition:all 0.3s}
+.mode-card:hover .players{background:rgba(255,215,0,0.15);color:#ffd700}
+
+/* 数据统计 */
+.stats{padding:80px 20px;background:linear-gradient(180deg,#0a0e17,#111827);position:relative}
+.stats .container{max-width:1000px;margin:0 auto}
+.stats .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px}
+.stat-card{text-align:center;padding:36px 20px;background:linear-gradient(145deg,#1a1f2e,#151a28);border:1px solid rgba(255,215,0,0.08);border-radius:20px;cursor:pointer;transition:all 0.4s cubic-bezier(0.4,0,0.2,1)}
+.stat-card:hover{transform:translateY(-6px);border-color:rgba(255,215,0,0.35);box-shadow:0 12px 35px rgba(245,166,35,0.12)}
+.stat-card .number{font-size:48px;font-weight:900;background:linear-gradient(135deg,#ffd700,#ff8c00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;transition:all 0.4s}
+.stat-card:hover .number{transform:scale(1.1)}
+.stat-card .label{color:#667788;font-size:15px;margin-top:8px}
+
+/* 页脚 */
+.footer{text-align:center;padding:40px 20px;background:#0a0e17;border-top:1px solid rgba(255,215,0,0.1);color:#556677;font-size:14px}
+.footer a{color:#8899aa;text-decoration:none;transition:color 0.3s}
+.footer a:hover{color:#ffd700}
+
+/* 滚动动画 */
+.fade-in{opacity:0;transform:translateY(30px);transition:all 0.6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* 响应式 */
+@media(max-width:768px){
+  .hero-content h1{font-size:36px}
+  .navbar .nav-links{display:none}
+  .section-title h2{font-size:28px}
+}
+</style>
+</head>
+<body>
+
+<!-- 导航栏 -->
+<nav class="navbar">
+  <div class="logo">
+    <div class="icon">&#9876;</div>
+    <span>王者荣耀</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home">首页</a></li>
+    <li><a href="#features">特色</a></li>
+    <li><a href="#heroes">英雄</a></li>
+    <li><a href="#modes">模式</a></li>
+    <li><a href="#stats">数据</a></li>
+  </ul>
+</nav>
+
+<!-- 主视觉 -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>王者荣耀</h1>
+    <p class="subtitle">5V5 公平竞技手游 · 国民 MOBA 大作<br>超过 100 位英雄，多种对战模式，随时随地开黑</p>
+    <div class="btn-group">
+      <a href="#features" class="btn btn-primary">了解更多</a>
+      <a href="#heroes" class="btn btn-outline">英雄列表</a>
+    </div>
+  </div>
+</section>
+
+<!-- 游戏特色 -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-title">
+      <h2>游戏特色</h2>
+      <p>为什么数亿玩家选择王者荣耀</p>
+    </div>
+    <div class="grid">
+      <div class="feature-card fade-in">
+        <div class="icon">&#9876;</div>
+        <h3>5V5 公平竞技</h3>
+        <p>经典三路推塔，纯实力对抗，不卖属性不滚服，真正的公平竞技体验</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="icon">&#9733;</div>
+        <h3>百位英雄</h3>
+        <p>刺客、法师、战士、坦克、射手、辅助，六大职业自由选择，找到你的本命英雄</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="icon">&#9889;</div>
+        <h3>极速匹配</h3>
+        <p>智能匹配系统，10秒开局，随时随地与好友开黑，享受畅快对战</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="icon">&#127942;</div>
+        <h3>电竞赛事</h3>
+        <p>KPL 职业联赛、世界冠军杯，完善的赛事体系，从路人到职业选手</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 英雄展示 -->
+<section class="heroes" id="heroes">
+  <div class="container">
+    <div class="section-title">
+      <h2>热门英雄</h2>
+      <p>选择你的本命英雄，征战王者峡谷</p>
+    </div>
+    <div class="grid">
+      <div class="hero-card fade-in">
+        <div class="img-placeholder bg-assassin">&#128481;</div>
+        <div class="info">
+          <div class="name">李白</div>
+          <span class="role">刺客</span>
+        </div>
+      </div>
+      <div class="hero-card fade-in">
+        <div class="img-placeholder bg-mage">&#128302;</div>
+        <div class="info">
+          <div class="name">貂蝉</div>
+          <span class="role">法师</span>
+        </div>
+      </div>
+      <div class="hero-card fade-in">
+        <div class="img-placeholder bg-warrior">&#9876;</div>
+        <div class="info">
+          <div class="name">吕布</div>
+          <span class="role">战士</span>
+        </div>
+      </div>
+      <div class="hero-card fade-in">
+        <div class="img-placeholder bg-tank">&#128737;</div>
+        <div class="info">
+          <div class="name">张飞</div>
+          <span class="role">坦克</span>
+        </div>
+      </div>
+      <div class="hero-card fade-in">
+        <div class="img-placeholder bg-marksman">&#127919;</div>
+        <div class="info">
+          <div class="name">后羿</div>
+          <span class="role">射手</span>
+        </div>
+      </div>
+      <div class="hero-card fade-in">
+        <div class="img-placeholder bg-support">&#10024;</div>
+        <div class="info">
+          <div class="name">蔡文姬</div>
+          <span class="role">辅助</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 游戏模式 -->
+<section class="modes" id="modes">
+  <div class="container">
+    <div class="section-title">
+      <h2>游戏模式</h2>
+      <p>多种玩法，总有适合你的</p>
+    </div>
+    <div class="grid">
+      <div class="mode-card fade-in">
+        <div class="mode-icon">&#127922;</div>
+        <h3>排位赛</h3>
+        <p>从青铜到王者，攀登荣耀之巅。每个赛季重新出发，证明你的实力</p>
+        <span class="players">5V5 · 征召模式</span>
+      </div>
+      <div class="mode-card fade-in">
+        <div class="mode-icon">&#9876;</div>
+        <h3>匹配赛</h3>
+        <p>轻松对战，练习新英雄，无压力享受游戏乐趣</p>
+        <span class="players">5V5 · 自由选择</span>
+      </div>
+      <div class="mode-card fade-in">
+        <div class="mode-icon">&#127942;</div>
+        <h3>巅峰赛</h3>
+        <p>王者段位专属，高手对决，冲击全国巅峰排名</p>
+        <span class="players">5V5 · 顶尖对决</span>
+      </div>
+      <div class="mode-card fade-in">
+        <div class="mode-icon">&#128081;</div>
+        <h3>娱乐模式</h3>
+        <p>克隆大作战、火焰山、深渊大乱斗等多种趣味玩法等你体验</p>
+        <span class="players">多种玩法</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 数据统计 -->
+<section class="stats" id="stats">
+  <div class="container">
+    <div class="section-title">
+      <h2>王者数据</h2>
+      <p>国民级手游的辉煌成就</p>
+    </div>
+    <div class="grid">
+      <div class="stat-card fade-in">
+        <div class="number" data-count="6">0</div>
+        <div class="label">亿注册用户</div>
+      </div>
+      <div class="stat-card fade-in">
+        <div class="number" data-count="100">0</div>
+        <div class="label">+ 英雄角色</div>
+      </div>
+      <div class="stat-card fade-in">
+        <div class="number" data-count="30">0</div>
+        <div class="label">+ 亿日活玩家</div>
+      </div>
+      <div class="stat-card fade-in">
+        <div class="number" data-count="2015">0</div>
+        <div class="label">年正式上线</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <p>&copy; 2024 王者荣耀介绍页面 | 本页面仅供学习交流使用</p>
+  <p style="margin-top:8px">游戏版权归 <a href="#">腾讯游戏</a> 所有</p>
+</footer>
+
+<script>
+// 滚动淡入动画
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// 数字滚动动画
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.count);
+      const duration = 2000;
+      const start = performance.now();
+
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(target * ease) + (target > 100 ? '' : '');
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target + (target > 100 ? '' : '');
+      }
+      requestAnimationFrame(update);
+      statObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-card .number').forEach(el => statObserver.observe(el));
+
+// 平滑滚动
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// 导航栏滚动阴影
+window.addEventListener('scroll', () => {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 50) {
+    navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
+  } else {
+    navbar.style.boxShadow = 'none';
+  }
+});
+</script>
+</body>
+</html>
